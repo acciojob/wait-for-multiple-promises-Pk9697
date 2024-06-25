@@ -1,8 +1,8 @@
 //your JS code here. If required.
 const tableBody=document.getElementById('output')
-
+ 
 tableBody.innerHTML=`
-	<tr>
+	<tr id="loading">
 		<td colspan="2">Loading...</td>
 	</tr>
 `
