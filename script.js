@@ -6,22 +6,23 @@ tableBody.innerHTML=`
 		<td colspan="2">Loading...</td>
 	</tr>
 `
-
-const promise1=()=>{
-	return new Promise((res,rej)=>{
-		setTimeout(()=>res({name:"Promise 1",time:1000}),1000)
-	})
+ 
+const randomTime=()=>{
+	return (Math.random()*2)+1
 }
-const promise2=()=>{
-	return new Promise((res,rej)=>{
-		setTimeout(()=>res({name:"Promise 2",time:500}),500)
-	})
-}
-const promise3=()=>{
-	return new Promise((res,rej)=>{
-		setTimeout(()=>res({name:"Promise 3",time:700}),700)
-	})
-}
+          
+const promise1=new Promise((res,rej)=>{
+	const time=randomTime()
+	setTimeout(()=>res({name:"Promise 1",time}),time*1000)
+})
+const promise2= new Promise((res,rej)=>{
+	const time=randomTime()
+	setTimeout(()=>res({name:"Promise 2",time}),time*1000)
+})
+const promise3= new Promise((res,rej)=>{
+	const time=randomTime()
+	setTimeout(()=>res({name:"Promise 3",time}),time*1000)
+})
 
 const finalPromise=()=>{
 	 return Promise.all([promise1,promise2,promise3])
@@ -29,7 +30,7 @@ const finalPromise=()=>{
 
 finalPromise()
 	.then((values)=>{
-		const total=values.reduce((acc,curr)=>acc+curr.time)
+		const total=values.reduce((acc,curr)=>acc+Number(curr.time),0)		
 		
 		const tableRows=values.map((value)=>(
 			`
